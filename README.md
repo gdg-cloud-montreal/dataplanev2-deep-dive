@@ -1,6 +1,5 @@
 
-
-### 1.1 Create GKE Cluster with Dataplane v2 Support
+## 1.1 Create GKE Cluster with Dataplane v2 Support
 **Step 1** Enable the Google Kubernetes Engine API.
 
 ```
@@ -39,7 +38,7 @@ gcloud container clusters get-credentials k8s-networking --zone us-central1-c
 ``` 
 
 
-### 1.2 Kubernetes Network Policy
+## 1.2 Kubernetes Network Policy
 
 Let's secure our 2 tier application using Kubernetes Network Policy!
 
@@ -74,7 +73,7 @@ anetd   2         2         2       2            2           kubernetes.io/os=li
     Our GKE cluster running `cilium:v1.11.1` which Cilium version 1.11.1
 
 
-### 4.1 Configure `deny-all` Network Policy inside the Namespace
+### 1.2.1 Configure `deny-all` Network Policy inside the Namespace
 
 **Step 1** Deploy `default-deny`
 
@@ -103,7 +102,7 @@ $Ingress IP
 !!! result
     can't access the app through ingress loadbalancer anymore.
 
-### 4.2 Configure Network Policy for `gowebapp-mysql`
+### 1.2.2 Configure Network Policy for `gowebapp-mysql`
 
 **Step 1** Using [Cilium Editor](https://editor.cilium.io/) test you Policy for Ingress traffic only
 
@@ -127,7 +126,7 @@ kubectl describe netpol backend-policy
 !!! result
     `run=gowebapp-mysql` Allowing ingress traffic only From PodSelector: `run=gowebapp` pod
 
-### 4.3 Configure Network Policy for `gowebapp`
+### 1.2.3 Configure Network Policy for `gowebapp`
 
 **Step 1** Configure a Network Policy to allow access for the Healthcheck IP ranges needed for the Ingress Loadbalancer, and hence allow access through the Ingress Loadbalancer. The IP rangers you need to enable access from are `35.191.0.0/16` and `130.211.0.0/22`
 
@@ -175,4 +174,4 @@ $ADDRESS/*
 **Step 5** Verify that `NotePad` application is functional (e.g can login and create new entries)
   
   
-### 1.3 Dataplane v2 Troubleshooting
+## 1.3 Dataplane v2 Troubleshooting
